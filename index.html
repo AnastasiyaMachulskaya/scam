@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#120830">
+  <title>С Днём рождения! 🎂</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    ┌─────────────────────────────────────────────────────────┐
+    │  ФОН С ТАНЦУЮЩИМИ КОТИКАМИ                              │
+    │                                                         │
+    │  Если GIF Giphy не загружается:                         │
+    │  1. Скачайте GIF с танцующими котиками                  │
+    │  2. Сохраните как: assets/images/cats.gif               │
+    │  3. В style.css найдите блок .bg и замените             │
+    │     background-image на: url('assets/images/cats.gif')  │
+    └─────────────────────────────────────────────────────────┘
+  -->
+  <div id="bg" class="bg"></div>
+
+  <!-- Затемняющий оверлей для читаемости контента поверх GIF -->
+  <div class="overlay" aria-hidden="true"></div>
+
+  <!--
+    Музыка: сразу пробуем autoplay.
+    Если браузер блокирует звук без жеста пользователя,
+    скрипт повторит запуск при первом касании/клике/нажатии клавиши.
+  -->
+  <audio
+    id="audio"
+    loop
+    preload="auto"
+    autoplay
+    playsinline
+    src="assets/music/elektroslabost-oleniy-penis_TSYfi147.mp3"
+  ></audio>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ОСНОВНОЙ ЭКРАН
+  ═══════════════════════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- Подсказка до нажатия на конверт -->
+    <p class="hint" id="hint">
+      <span class="hint__arrow" aria-hidden="true">👇</span>
+      Нажми на конверт!
+    </p>
+
+    <!--
+      Сцена: содержит конверт и купюру.
+      position: relative — якорь для абсолютно спозиционированной купюры.
+    -->
+    <div class="scene" id="scene">
+
+      <!--
+        КОНВЕРТ — чистый CSS, без внешних изображений.
+        Клик/тап запускает всю цепочку анимаций.
+      -->
+      <div
+        class="envelope"
+        id="envelope"
+        role="button"
+        tabindex="0"
+        aria-label="Нажмите, чтобы открыть конверт"
+      >
+        <!-- Тело конверта: прямоугольник + декоративные сгибы -->
+        <div class="env-body">
+          <div class="env-fold env-fold-left"   aria-hidden="true"></div>
+          <div class="env-fold env-fold-right"  aria-hidden="true"></div>
+          <div class="env-fold env-fold-bottom" aria-hidden="true"></div>
+        </div>
+
+        <!-- Клапан конверта — отдельный 3D-слой с лицевой и обратной сторонами -->
+        <div class="env-flap" id="envFlap" aria-hidden="true">
+          <div class="env-flap-face env-flap-face-front"></div>
+          <div class="env-flap-face env-flap-face-back"></div>
+        </div>
+
+        <!-- Декоративное сердечко на клапане -->
+        <div class="env-heart" id="envHeart" aria-hidden="true">💌</div>
+      </div>
+      <!-- /envelope -->
+
+      <!-- Купюра 100 BYN — реальное изображение, вылетает из конверта после открытия -->
+      <div class="banknote" id="banknote" aria-hidden="true">
+        <img
+          src="assets/images/100_Belarus_2009_front.jpg"
+          alt="Купюра 100 BYN"
+          class="banknote-img"
+          draggable="false"
+        >
+      </div>
+      <!-- /banknote -->
+
+    </div>
+    <!-- /scene -->
+
+    <!-- Поздравительный текст — появляется последним в цепочке -->
+    <h1 class="birthday" id="birthday" aria-live="assertive" aria-atomic="true">
+      С&nbsp;Днём&nbsp;рождения!
+    </h1>
+
+  </main>
+  <!-- /main -->
+
+  <!--
+    canvas-confetti через CDN — лёгкая библиотека без зависимостей.
+    Репозиторий: https://github.com/catdad/canvas-confetti
+  -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
