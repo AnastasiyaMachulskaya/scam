@@ -77,11 +77,11 @@ body {
   /* Локальный GIF-фон */
   background-image: url('assets/images/sims-cat.gif');
   background-size: cover;
-  background-position: center;
+  background-position: 50% 32%;
   background-repeat: no-repeat;
 
   /* Лёгкое масштабирование — убирает возможные белые полосы */
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 /* ════════════════════════════════════════════════════
@@ -92,8 +92,8 @@ body {
   position: fixed;
   inset: 0;
   z-index: 1;
-  /* Затемнение 60% — котики видны, но текст читаемый */
-  background: rgba(12, 4, 28, 0.60);
+  /* Более мягкое затемнение, чтобы GIF лучше читался */
+  background: rgba(12, 4, 28, 0.38);
   pointer-events: none; /* Клики и тапы проходят насквозь */
 }
 
@@ -169,6 +169,7 @@ body {
   position: relative; /* Якорь для абсолютно позиционированной купюры */
   /* Увеличено примерно на 40% относительно прежнего размера */
   width: min(448px, 95vw);
+  margin-inline: auto;
   perspective: 1400px;
   perspective-origin: center 15%;
 }
@@ -635,9 +636,43 @@ body {
 /* Стандартные мобильные */
 @media (max-width: 600px) {
   .main {
-    gap: 20px;
-    padding-top: 24px;
+    gap: 18px;
+    padding-top: 20px;
     padding-bottom: 24px;
+  }
+
+  .bg {
+    background-position: 52% 28%;
+  }
+
+  .scene {
+    width: min(360px, 84vw);
+  }
+
+  .birthday {
+    max-width: 92vw;
+    font-size: clamp(24px, 9vw, 46px);
+  }
+}
+
+/* Узкие iPhone-портреты: уменьшаем сцену и поднимаем фон с котом */
+@media (max-width: 430px) and (orientation: portrait) {
+  .main {
+    gap: 16px;
+    padding: 18px 16px 24px;
+  }
+
+  .hint {
+    font-size: clamp(15px, 4.4vw, 18px);
+  }
+
+  .scene {
+    width: clamp(272px, 78vw, 316px);
+  }
+
+  .bg {
+    background-position: 54% 24%;
+    transform: scale(1.01);
   }
 }
 
